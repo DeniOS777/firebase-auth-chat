@@ -3,14 +3,14 @@ import { googleSignIn, setChat } from './chatOperations';
 
 const chatSlice = createSlice({
   name: 'chat',
-  initialState: { user: { isAuth: false }, chat: {} },
+  initialState: { user: { isAuth: false }, chat: [] },
   extraReducers: {
-    [googleSignIn.fulfilled]: (state, action) => {
-      action.payload.isAuth = true;
-      state.user = action.payload;
+    [googleSignIn.fulfilled]: (state, { payload }) => {
+      payload.isAuth = true;
+      state.user = payload;
     },
-    [setChat]: (state, action) => {
-      state.chat = action.payload;
+    [setChat]: (state, { payload }) => {
+      state.chat = [...payload];
     },
   },
 });

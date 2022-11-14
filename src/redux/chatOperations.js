@@ -28,8 +28,7 @@ export const getChat = createAsyncThunk('chat/getchat', async (_, thunkAPI) => {
     const starCountRef = ref(db, 'chat/');
     onValue(starCountRef, snapshot => {
       const data = snapshot.val();
-      thunkAPI.dispatch(setChat(data));
-      console.log(data);
+      thunkAPI.dispatch(setChat(Object.values(data)));
     });
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -39,17 +38,16 @@ export const getChat = createAsyncThunk('chat/getchat', async (_, thunkAPI) => {
 export const sendMessage = createAsyncThunk(
   'chat/sendmessage',
   async (arg, thunkAPI) => {
-    console.log(arg);
     try {
       const postId = Number(Math.random().toFixed(3)) * 1000;
       const user = thunkAPI.getState().user;
-      const data = await set(ref(db, `chat/${postId}`), {
+      const data = await set(ref(db, 'chat/' + postId), {
+        id: postId,
         username: user.name,
         email: user.email,
         message: arg,
       });
-      console.log(data);
-      return;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

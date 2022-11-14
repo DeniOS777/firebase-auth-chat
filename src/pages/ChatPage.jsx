@@ -62,6 +62,7 @@ export const ChatPage = () => {
       >
         {messages.map(({ id, message, username }) => (
           <li
+            key={id}
             className="d-flex gap-3 flex-column p-3"
             style={{
               backgroundColor: 'lightgrey',
@@ -69,7 +70,6 @@ export const ChatPage = () => {
               boxShadow:
                 '0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0)',
             }}
-            key={id}
           >
             <p
               className="m-0 px-2 py-1 align-self-end align-items-center text-white"

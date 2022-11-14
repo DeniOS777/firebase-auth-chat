@@ -8,6 +8,8 @@ export const App = () => {
         maxWidth: '1200px',
         paddingLeft: '16px',
         paddingRight: '16px',
+        paddingTop: '16px',
+        paddingBottom: '32px',
       }}
     >
       <Router />
